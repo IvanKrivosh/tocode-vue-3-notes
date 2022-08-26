@@ -36,7 +36,7 @@ function saveNotes() {
 
 function getNotes() {
   const notesString = localStorage.getItem('notes');
-  if (notesString) return JSON.parse(localStorage.getItem('notes'));
+  if (notesString) return JSON.parse(notesString);
 }
 
 onMounted(() => {
