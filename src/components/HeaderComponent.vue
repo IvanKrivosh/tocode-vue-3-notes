@@ -2,7 +2,7 @@
   <header class="navbar">
     <div class="container">
       <div class="navbar-content">
-        <a class="navbar-logo" href="/">{{ title }}</a>
+        <a class="navbar-logo" href="/">{{ app.title }}</a>
         <ul class="navbar-list">
           <li v-for="item of links" class="navbar-item" :key="item.link">
             <router-link :to="item.link" class="navbar-link">{{
@@ -15,16 +15,12 @@
   </header>
 </template>
 
-<script>
-import { links, title } from '@/_config';
+<script setup>
+import { links, app } from '@/_config';
+</script>
 
+<script>
 export default {
   name: 'HeaderComponent',
-  data() {
-    return {
-      title,
-      links,
-    };
-  },
 };
 </script>

@@ -10,15 +10,12 @@
   </div>
 </template>
 
+<script setup>
+import { links } from '@/_config';
+</script>
+
 <script>
-import { links, title } from '@/_config';
 export default {
   name: 'FooterComponent',
-  data() {
-    return {
-      title,
-      links,
-    };
-  },
 };
 </script>
