@@ -14,7 +14,7 @@ import TheList from '@/components/Notes/TheList';
 const state = reactive({
   items: [],
   setItems(newItems) {
-    if (newItems && newItems.length) this.items.splice(0, 0, ...newItems);
+    if (newItems && newItems.length) this.items = newItems;
   },
 });
 
@@ -26,7 +26,7 @@ const handlerRemoveItem = e => {
   state.items.splice(e.index, 1);
 };
 
-watch(state.items, () => {
+watch(state, () => {
   saveNotes();
 });
 
