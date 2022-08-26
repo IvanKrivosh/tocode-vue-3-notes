@@ -33,9 +33,7 @@ const props = defineProps({
 const emits = defineEmits(['onRemove']);
 const noteTags = computed(() => {
   if (props.item.tags && props.item.tags.length) {
-    return props.item.tags.map(x => {
-      return tags.find(i => i.label === x);
-    });
+    return tags.filter(x => props.item.tags.includes(x.label));
   } else return [defaultTag];
 });
 </script>
