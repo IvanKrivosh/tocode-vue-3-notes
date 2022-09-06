@@ -2,45 +2,28 @@
   <div class="home">
     <TheForm @onSubmit="handlerSubmit" />
     <hr />
-    <TheList :items="state.items" @onRemoveItem="handlerRemoveItem" />
+    <TheList :items="notes" @onRemoveItem="handlerRemoveItem" />
   </div>
 </template>
 
 <script setup>
-import { reactive, watch, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { onMounted, computed } from 'vue';
 import TheForm from '@/components/Notes/TheForm';
 import TheList from '@/components/Notes/TheList';
-
-const state = reactive({
-  items: [],
-  setItems(newItems) {
-    if (newItems && newItems.length) this.items = newItems;
-  },
-});
+const store = useStore();
+const notes = computed(() => store.getters.getNotes);
 
 const handlerSubmit = ({ value, tags }) => {
-  state.items.push({ id: Date.now(), value, tags });
+  store.commit('addNewNote', { value, tags });
 };
 
 const handlerRemoveItem = e => {
-  state.items.splice(e.index, 1);
+  store.commit('deleteNote', e.index);
 };
 
-watch(state, () => {
-  saveNotes();
-});
-
-function saveNotes() {
-  localStorage.setItem('notes', JSON.stringify(state.items));
-}
-
-function getNotes() {
-  const notesString = localStorage.getItem('notes');
-  if (notesString) return JSON.parse(notesString);
-}
-
 onMounted(() => {
-  state.setItems(getNotes());
+  store.dispatch('getNotes');
 });
 </script>
 
