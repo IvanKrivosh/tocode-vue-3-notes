@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-
+const ROOT_PATH = '/';
 const routes = [
   {
-    path: '/',
+    path: ROOT_PATH,
     name: 'home',
-    component: () => import('../views/HomeView.vue'),
+    component: () =>
+      import(/* webpackChunkName: "home" */ '../views/HomeView.vue'),
   },
   {
-    path: '/about',
+    path: `${ROOT_PATH}about`,
     name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -17,7 +18,7 @@ const routes = [
   },
   {
     path: '/:catchAll(.*)*',
-    redirect: () => '/',
+    redirect: () => ROOT_PATH,
   },
 ];
 
